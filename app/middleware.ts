@@ -3,10 +3,12 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request:NextRequest,response:NextResponse) {
-    const session=request.cookies.get('session')
+    const session=request.cookies.get('_session')
+    
+    
     // return to login if no session
     if(!session){
-        return NextResponse.redirect(new URL('/login',request.url))
+        return NextResponse.redirect(new URL('/auth/login',request.url))
 
     }
 

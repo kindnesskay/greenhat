@@ -1,14 +1,36 @@
-import Logout from "@/components/logout";
+import Dashboard from "@/components/Dashboard";
+import LoadingScreen from "@/components/Loader";
+import { getCurrentUser } from "@/lib/firebase/helpers";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
-export default function page() {
+interface props {
+  userData: {
+    uid: string | undefined;
+    email: string | undefined;
+    emailVerified: boolean | undefined;
+    displayName: string | undefined;
+    photoURL: string | undefined;
+    phoneNumber: string | undefined;
+  };
+}
+export default async function page() {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect("/auth/login");
+  }
+
+  const userData = {
+    uid: user.uid,
+    email: user.email,
+    emailVerified: user.emailVerified,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    phoneNumber: user.phoneNumber,
+  };
   return (
-    <div className="mx-auto max-w-4xl my-32 ">
-      <h1 className="text-3xl mb-8">
-        You are now in protected area of the app
-      </h1>
-      <div>
-        <Logout />
-      </div>
-    </div>
+    <Suspense fallback={<LoadingScreen />}>
+      <Dashboard currentUser={userData} />
+    </Suspense>
   );
 }

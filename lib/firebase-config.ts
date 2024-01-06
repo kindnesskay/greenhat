@@ -1,16 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
-import {
-  CollectionReference,
-  addDoc,
-  collection,
-  getFirestore,
-  doc,
-  setDoc,
-} from "firebase/firestore";
-import { getDocs, where, query } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -21,6 +12,6 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+export const client_auth = getAuth(app);
 export const db = getFirestore(app);
 export const provider = new GoogleAuthProvider();
