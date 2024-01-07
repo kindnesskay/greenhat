@@ -4,6 +4,9 @@ import { UserRecord } from "firebase-admin/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LoadingScreen from "./Loader";
+import Profile from "./Profile";
+import Portfolio from "./Portfolio";
+import DepositWithdrawButtons from "./Actions";
 
 export default function Dashboard({
   currentUser,
@@ -18,6 +21,9 @@ export default function Dashboard({
   };
 }) {
   const [isLoading, setIsloading] = useState(false);
+  const [balance, setPortfolioValue] = useState(10000);
+  const [dailyChange, setDailyChange] = useState(1.25); // Update with actual data
+
   const router = useRouter();
   const handleSignOut = async () => {
     setIsloading(true);
@@ -29,18 +35,49 @@ export default function Dashboard({
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <div className="container mx-auto p-4">
-          <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">
-              {currentUser?.displayName}
-            </h2>
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={handleSignOut}
-            >
-              Logout
-            </button>
+        <div className="flex flex-col bg-white p-2 w-full">
+          {/* Header Section */}
+          <div className="w-full">
+            <Profile
+              name={currentUser?.displayName}
+              photoUrl={currentUser?.photoURL}
+            />
+          </div>
+
+          {/* Portfolio Value Card */}
+          <div className="w-full">
+
+          <Portfolio balance={balance} interestRate={dailyChange} />
+          </div>
+
+          
+          <div className="mt-4 px-4 py-2 bg-white rounded-md shadow-md">
+          <DepositWithdrawButtons/>
+            
+          </div>
+
+          {/* Performance Metrics List Section */}
+          <div className="mt-4 px-4 py-2 bg-white rounded-md shadow-md">
+            <h3 className="text-lg font-bold mb-2">Performance Metrics</h3>
+            <ul className="text-gray-700">
+              <li>
+                Today's Change:{" "}
+                <span className="text-green-500">{`+ ${dailyChange.toFixed(
+                  2
+                )}%`}</span>
+              </li>
+              <li>
+                7-Day Change: <span className="text-red-500">{-4.32}%</span>
+              </li>
+              <li>
+                1-Month Change:{" "}
+                <span className="text-green-500">{`+ 2.77%`}</span>
+              </li>
+              <li>
+                1-Year Change:{" "}
+                <span className="text-green-500">{`+ 15.64%`}</span>
+              </li>
+            </ul>
           </div>
         </div>
       )}
