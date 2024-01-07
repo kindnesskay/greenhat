@@ -1,16 +1,13 @@
-import { redirect } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { client_auth } from "./firebase-config";
 
 export default async function logout() {
-  const token={value:""}
+  await signOut(client_auth);
   await fetch("http://localhost:3000/api/auth", {
     method: "DELETE",
-    headers: {
-      Cookie: `session=${token?.value}`,
-    },
   })
     .then((response) => {
-      console.log(response);
-      redirect("/");
+      return response;
     })
     .catch((error) => {
       console.error(error);

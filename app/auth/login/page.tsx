@@ -1,48 +1,15 @@
-"use client";
-import { getRedirectResult, signInWithRedirect } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { auth, provider } from "@/lib/firebase-config";
-import { useRouter } from "next/navigation";
-export default function page() {
-  const router = useRouter();
-  useEffect(() => {
-    getRedirectResult(auth).then(async (userCred) => {
-      if (!userCred) {
-        return;
-      }
+import Login from "@/components/Login";
+import { getCurrentUser } from "@/lib/firebase/helpers";
+import { redirect } from "next/navigation";
 
-      fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${await userCred.user.getIdToken()}`,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            router.push("/dashboard");
-          }
-        })
-
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  }, []);
-
-  function handleSignIn() {
-    signInWithRedirect(auth, provider);
+export default async function page() {
+  const user = await getCurrentUser();
+  if (user) {
+    redirect("/dashboard");
   }
   return (
-    <section className="h-full w-full flex justify-center items-center">
-      <div className="w-fit p-4">
-        <h2 className="text-2xl text-center uppercase mb-2">Login page</h2>
-        <button
-          className="p-4 rounded-lg bg-sky-200"
-          onClick={() => handleSignIn()}
-        >
-          Sign In With Google
-        </button>
-      </div>
-    </section>
+    <>
+      <Login />
+    </>
   );
 }

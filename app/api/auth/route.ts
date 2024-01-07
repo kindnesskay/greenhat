@@ -1,24 +1,17 @@
-import firebaseAdmin from "@/lib/firebase-admin-config";
-import { invalidateLogin } from "@/lib/invalidateLogin";
-import { SessionCookieOptions } from "firebase-admin/auth";
-import {
-  CookieListItem,
-  ResponseCookie,
-} from "next/dist/compiled/@edge-runtime/cookies";
+import { auth } from "@/lib/firebase-admin-config";
+import { revokAllSessions } from "@/lib/firebase/helpers";
 import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const session = cookies().get("session")?.value || "";
+  const session = cookies().get("_session")?.value || "";
   // validate is the cookie exist in the request
   if (!session) {
     return NextResponse.json({ IsLogged: false }, { status: 401 });
   }
 
   // use firebase Admin to validate the session cookie
-  const decodedClaims = await firebaseAdmin
-    ?.auth()
-    .verifySessionCookie(session, true);
+  const decodedClaims = await auth.verifySessionCookie(session, true);
   if (!decodedClaims) {
     return NextResponse.json({ IsLogged: false }, { status: 401 });
   }
@@ -26,10 +19,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const authorization = headers().get("Authorization");
-
-  const idToken = authorization?.split("Bearer")[1].trim();
-
+  const reqBody = (await request.json()) as { idToken: string };
+  const idToken = reqBody.idToken;
   try {
     if (!idToken) {
       return NextResponse.json(
@@ -38,12 +29,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
       );
     }
 
-    const decodedToken = await firebaseAdmin?.auth().verifyIdToken(idToken);
+    const decodedToken = await auth.verifyIdToken(idToken);
     if (decodedToken) {
       // Generate session cookie
       const expiresIn = 60 * 60 * 24 * 5 * 1000;
       const sessionCookie =
-        (await firebaseAdmin?.auth().createSessionCookie(idToken, {
+        (await auth.createSessionCookie(idToken, {
           expiresIn,
         })) || "";
 
@@ -53,12 +44,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
         httpOnly: true,
         secure: true,
       };
-      await firebaseAdmin
-        ?.auth()
+      // create the session cookie
+      await auth
         .createSessionCookie(idToken, { expiresIn })
         .then((sessionCookie) => {
-          
-          
+          cookies().set("_session", sessionCookie, options);
         });
     }
   } catch (error) {
@@ -73,12 +63,18 @@ export async function POST(request: NextRequest, response: NextResponse) {
 }
 
 export async function DELETE(request: NextRequest, response: NextResponse) {
-  // const token = cookies().get("session")?.value || "";
-  
+  const sessionCookie = cookies().get("_session")?.value || "";
+  if (!sessionCookie) {
+    return NextResponse.json(
+      { success: false, error: "Session not found" },
+      { status: 400 }
+    );
+  }
+  cookies().delete("_session");
+  await revokAllSessions(sessionCookie);
 
-  // if (!token) {
-  //   return NextResponse.json({ isLogged: false }, { status: 200 });
-  // }
-  // await invalidateLogin(token);
-  return NextResponse.json({},{status:200});
+  return NextResponse.json(
+    { success: true, message: "Signed out successfull" },
+    { status: 200 }
+  );
 }
