@@ -4,6 +4,7 @@ import "../globals.css";
 import LeftSideBar from "@/components/LeftSideBar";
 import RightSideBar from "@/components/RightSideBar";
 import NavBar from "@/components/Navbar";
+import MenuDrawer from "@/components/MenuDrawer";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({
         <main className="flex flex-row">
           <LeftSideBar />
           <section className="main-container">
+            <MenuDrawer/>
             <div className="w-full max-w-4xl">{children}</div>
           </section>
           <RightSideBar />
