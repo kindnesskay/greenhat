@@ -1,18 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+*{
+  user-select: none;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
 
-
 body {
   color: rgb(var(--foreground-rgb));
-  background: var(--background-end-rgb)
+  background: var(--background-end-rgb);
 }
-.red-border{
-  border:1px solid red
+.red-border {
+  border: 1px solid red;
+}
+
+@layer components {
+  /* main */
+  .main-container {
+    @apply flex min-h-screen flex-1 flex-col items-center px-1 pb-10 pt-16 max-md:pb-32 sm:px-10;
+  }
+  .top-bar {
+    @apply fixed top-0 z-30 flex items-center w-full justify-between px-6 py-3;
+  }
+  .leftsidebar {
+    @apply sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto  pb-5 pt-28 max-md:hidden;
+  }
+  .rightsidebar {
+    @apply sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto pb-5 pt-28 max-xl:hidden;
+  }
 }

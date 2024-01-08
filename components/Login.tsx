@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { signInWithGoogle } from "@/lib/firebase/auth/helpers";
 import { useState } from "react";
 import LoadingScreen from "@/components/Loader";
+import Image from "next/image";
 
 export default function Login() {
   const router = useRouter();
@@ -20,13 +21,14 @@ export default function Login() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <section className="h-full w-full flex justify-center items-center">
-          <div className="w-fit p-4">
-            <h2 className="text-2xl text-center uppercase mb-2">Login page</h2>
+        <section className="h-screen w-full flex justify-center items-center">
+          <div className="w-full max-w-sm">
+            <h2 className="text-2xl font-bold text-center uppercase mb-8">Lets get Started</h2>
             <button
-              className="p-4 rounded-lg bg-sky-200"
+              className="font-semibold p-4 rounded-lg justify-center flex gap-4 text-md bg-white w-full border border-sold border-gray-200"
               onClick={() => handleSignIn()}
             >
+              <Image alt="google logo g" src={"/assets/google.png"} height={24} width={24}/>
               Sign In With Google
             </button>
           </div>

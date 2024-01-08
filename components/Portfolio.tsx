@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 export default function Portfolio({
   balance,
   interestRate,
@@ -8,26 +8,32 @@ export default function Portfolio({
   interestRate: number;
 }) {
   return (
-    <div className="bg-sky-500 text-white rounded-lg shadow-md p-6 w-full ">
+    <div className=" rounded-lg shadow-md p-6 w-full max-w-lg">
       <div className="mb-4">
         <p>Balance</p>
         <div className="flex justify-between">
-        <p className="text-3xl font-bold">${balance.toFixed(2)}</p>
-        <Image src={'/assets/wallet.svg'} height={36} width={36} alt="wallet icon" className="xs:hidden"/>
+          <p className="text-3xl font-bold">${balance.toFixed(2)}</p>
+          <Image
+            src={"/assets/wallet.svg"}
+            height={36}
+            width={36}
+            alt="wallet icon"
+            className="xs:hidden bg-black px-1 rounded-xl"
+          />
         </div>
       </div>
-      <div className="mb-4">
-        <p>Interest Rate</p>
-        <p className="text-xl font-bold">{interestRate}%</p>
-      </div>
-      <div>
-        <p >Total Earnings</p>
-        <p className="text-xl font-bold">{((balance* interestRate)/100).toFixed(2)}</p>
+      <div className="flex justify-between">
+        <div>
+          <p >Total Earnings</p>
+          <p className="text-lg font-semibold">
+            {((balance * interestRate) / 100).toFixed(2)}
+          </p>
+        </div>
+        <div>
+          <p>Interest Rate</p>
+          <p className="text-lg font-semibold">{interestRate}%</p>
+        </div>
       </div>
     </div>
   );
 }
-import Image from "next/image";
-// BankCard.tsx
-
-import React from "react";
