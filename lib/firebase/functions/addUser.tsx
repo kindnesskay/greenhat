@@ -1,12 +1,11 @@
 import { db } from "@/lib/firebase-config";
 import { doc, setDoc } from "firebase/firestore";
-type userData = {
-  userID: string;
-  firstname: string;
-  lastname: string;
-  username: string;
-  transactions: String;
-  join_date:Date
+export type userData = {
+  userID: string 
+  name: string | null 
+  username: string 
+  transactions: String 
+  join_date:Date 
 };
 const addUserToDb = async (data: userData) => {
   try {
@@ -18,3 +17,5 @@ const addUserToDb = async (data: userData) => {
     return false;
   }
 };
+
+export default addUserToDb

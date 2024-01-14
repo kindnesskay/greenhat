@@ -21,7 +21,6 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest, response: NextResponse) {
   const reqBody = (await request.json()) as { idToken: string };
   const idToken = reqBody.idToken;
-  console.log(idToken);
   
   try {
     if (!idToken) {
