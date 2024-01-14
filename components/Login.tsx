@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { signInWithGoogle } from "@/lib/firebase/auth/helpers";
+import { signInWithGoogle } from "@/lib/firebase/auth/signinWIthGoogle";
 import { useState } from "react";
 import LoadingScreen from "@/components/Loader";
 import Image from "next/image";

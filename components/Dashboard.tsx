@@ -49,9 +49,11 @@ export default function Dashboard({
           </div>
 
           {/* Portfolio Value Card */}
-          <div className="w-full flex flex-col items-center gap-2">
+          <div className="w-full flex flex-col items-center gap-2 md:flex-row ">
+            <div className=" w-full ">
             <Portfolio balance={balance} interestRate={dailyChange} />
-            <div className="py-2 flex gap-2 w-fit">
+            </div>
+            <div className="py-2 flex gap-2 w-full justify-center md:flex-col md:justify-center md:items-center">
               <DepositeButon />
               <WithdrawButon />
             </div>

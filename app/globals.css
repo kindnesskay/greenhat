@@ -21,7 +21,7 @@ body {
 @layer components {
   /* main */
   .main-container {
-    @apply flex min-h-screen flex-1 flex-col items-center px-1 pb-10 pt-16 max-md:pb-32 sm:px-10;
+    @apply flex min-h-screen flex-1 flex-col items-center pb-10 pt-16 max-md:pb-32 sm:px-10;
   }
   .top-bar {
     @apply fixed top-0 z-30 flex items-center w-full justify-between px-6 py-3;
