@@ -7,6 +7,8 @@ interface props {
   success:boolean
 }
 export default function Transaction({ type, amount, date, status,success }: props) {
+  let newdate=new Date(date).toLocaleDateString()
+  date=newdate
   const getStatusColorClass = () => {
     switch (status.toLowerCase()) {
       case "success":

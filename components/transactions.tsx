@@ -1,26 +1,41 @@
+"use client";
+import getTransactions from "@/lib/firebase/functions/getTransactions";
 import Transaction from "./cards/transaction";
+import { transaction } from "@/lib/firebase/functions/addTransaction";
+import { useEffect, useState } from "react";
 
-const sample = {
-  id: "1",
-  type: "Withdrawal",
-  amount: 500,
-  date: "2024-01-08",
-  status: "Success",
-  success:true
-};
-export default function Transactions() {
+
+export default function Transactions({userID}:{userID:string}) {
+  const [transactions, setTransactions] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getTransactions(userID);
+      if (data) {
+        setTransactions(data);
+      }
+    }
+    fetchData()
+  }, []);
   return (
     <div>
-      <h2 className="text-md font-semibold p-2 text-gray-500">Transaction Details</h2>
-      <div>
-        <Transaction
-        success={sample.success}
-          id={sample.id}
-          type={sample.type}
-          status={sample.status}
-          amount={sample.amount}
-          date={sample.date}
-        />
+      <h2 className="text-md font-semibold p-2 text-gray-500">
+        Transaction Details
+      </h2>
+      <div className="flex flex-col gap-2 ">
+        {transactions &&
+          transactions.map((transaction: transaction) => {
+            return (
+              <Transaction
+                key={transaction.trxId}
+                success={transaction.approved}
+                id={transaction.trxId}
+                type={transaction.type}
+                status={transaction.status}
+                amount={transaction.amount}
+                date={transaction.date}
+              />
+            );
+          })}
       </div>
     </div>
   );
