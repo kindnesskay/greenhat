@@ -1,9 +1,10 @@
-import Example from "@/components/Hero";
-export default function Home() {
+import Home from "@/components/Home";
+
+export default function page() {
   return (
     
-      <section className="h-screen w-full">
-        <Example/>
+      <section className=" w-full">
+        <Home/>
       </section>
 
   );

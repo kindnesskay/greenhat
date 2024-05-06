@@ -1,25 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
+* {
   user-select: none;
+  padding: 0;
+  box-sizing: border-box;
 }
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: var(--background-end-rgb);
 }
 .red-border {
   border: 1px solid red;
 }
-
+img {
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
 @layer components {
   /* main */
+  .container {
+    @apply w-full flex justify-center;
+  }
+
   .main-container {
     @apply flex min-h-screen flex-1 flex-col items-center pb-10 pt-16 max-md:pb-32 sm:px-10;
   }
@@ -31,5 +37,17 @@ body {
   }
   .rightsidebar {
     @apply sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto pb-5 pt-28 max-xl:hidden;
+  }
+  .slider-button {
+    @apply rounded-full p-2 h-12 w-12 bg-slate-200;
+  }
+  .slider-button:active {
+    @apply bg-slate-400;
+  }
+  .task-view-container {
+    @apply flex flex-col w-full items-center h-full;
+  }
+  section {
+    @apply pt-4 pb-20;
   }
 }

@@ -1,16 +1,30 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-export default function NavBar() {
-  return (
-    <nav className="top-bar pl-24 bg-white">
-      <Link className="font-bold text-xl flex items-center gap-2" href={"/"}>
-        Smart Funds
-      </Link>
+import { usePathname, useRouter } from "next/navigation";
 
-      <Link href={"/profile"} className=" max-[270px]:hidden">
-        <Image alt="menu" height={36} width={36} src={"/assets/profile.svg"} />
-      </Link>
-    </nav>
+function NavBar() {
+  const router = useRouter();
+  const path = usePathname();
+
+  return (
+    <header className=" w-full fixed z-10 max-w-lg">
+      <nav className="h-12 w-full flex items-center mt-4">
+        <button
+          className="h-10 w-10 "
+          onClick={() => router.back()}
+          hidden={path == "/"}
+        >
+          <Image
+            src={"/assets/back.png"}
+            alt="back-icon"
+            width={50}
+            height={50}
+            className="h-full w-full"
+          />
+        </button>
+      </nav>
+    </header>
   );
 }
+
+export default NavBar;
