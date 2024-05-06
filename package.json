@@ -1,5 +1,5 @@
 {
-  "name": "smartfunds",
+  "name": "greenhat",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "firebase": "^10.7.1",
-    "firebase-admin": "^12.0.0",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.3",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",

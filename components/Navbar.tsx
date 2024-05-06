@@ -1,23 +1,30 @@
 "use client";
-
 import Image from "next/image";
-import Link from "next/link";
-export default function NavBar() {
+import { usePathname, useRouter } from "next/navigation";
+
+function NavBar() {
+  const router = useRouter();
+  const path = usePathname();
+
   return (
-    <nav className="w-full z-40 p-2 py-4 min-h-16 bg-white absolute">
-      <div className="flex justify-around items-center flex-wrap">
-        <div >
-          <Image alt="menu" height={36} width={36} src={'/assets/menu.svg'}/>
-        </div>
-        <div className="flex justify-center">
-          <Link className="font-bold text-2xl" href={"/"}>
-            Smart Funds
-          </Link>
-        </div>
-        <Link href={'/dashboard'} className=" max-[270px]:hidden">
-          <Image alt="menu" height={36} width={36}  src={'/assets/profile.svg'}/>
-        </Link>
-      </div>
-    </nav>
+    <header className=" w-full fixed z-10 max-w-lg">
+      <nav className="h-12 w-full flex items-center mt-4">
+        <button
+          className="h-10 w-10 "
+          onClick={() => router.back()}
+          hidden={path == "/"}
+        >
+          <Image
+            src={"/assets/back.png"}
+            alt="back-icon"
+            width={50}
+            height={50}
+            className="h-full w-full"
+          />
+        </button>
+      </nav>
+    </header>
   );
 }
+
+export default NavBar;
