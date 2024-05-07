@@ -2,10 +2,9 @@ import BottomNav from "@/components/BottomNav";
 import "../globals.css";
 import NavBar from "@/components/NavBar";
 import AppContextProvider from "@/context/AppContext";
-import { Metadata } from "next";
-export const metada: Metadata = {
+export const metadata = {
   title: "Greenhat",
-  description: "Trade loger",
+  description: "Trade lolger",
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

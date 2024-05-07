@@ -6,7 +6,14 @@ export type taskType = {
   profit: number;
   loss: number;
 };
-
+export const initialTask = {
+  title: "",
+  id: "",
+  date: "",
+  note: "",
+  profit: 0,
+  loss: 0,
+};
 type taskCompType = {
   task: taskType;
   handleTaskClick: any;
@@ -22,7 +29,7 @@ export default function Task({ task, handleTaskClick }: taskCompType) {
   return (
     <div
       className={`h-16 w-full flex flex-row gap-2 justify-between rounded-lg`}
-      onClick={() => handleTaskClick(id)}
+      onClick={() => handleTaskClick(task)}
     >
       <div
         className={`border-r-4 border-solid ${
@@ -36,10 +43,15 @@ export default function Task({ task, handleTaskClick }: taskCompType) {
           <p className="text-lg  font-semibold ">{title}</p>
           <p className="text-xs text-slate-400 font-medium ">{date}</p>
         </div>
-        {/* <div className=" flex-1 flex flex-col items-center justify-between font-semibold text-gray-700">
-          <p>Profit {" " + profit}</p>
-          <p>Loss {" " + loss}</p>
-        </div> */}
+        <div className="flex items-center font-semibold text-gray-700 pr-4">
+          <p
+            className={`font-bold text-2xl ${
+              profit > loss ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {profit > loss ? profit : loss}
+          </p>
+        </div>
       </div>
     </div>
   );

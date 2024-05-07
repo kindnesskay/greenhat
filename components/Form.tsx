@@ -50,9 +50,6 @@ const resolver: Resolver<formValues> = async (values) => {
 };
 export default function Form() {
   const { database } = UseApp();
-  if (database) {
-    database.update();
-  }
   const {
     register,
     handleSubmit,
