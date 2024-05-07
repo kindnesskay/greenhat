@@ -1,7 +1,7 @@
 import "../globals.css";
-import NavBar from "@/components/NavBar";
 import BottomNav from "@/components/BottomNav";
 import AppContextProvider from "@/context/AppContext";
+import NavBar from "@/components/NavBar";
 export const metadata = {
   title: "Greenhat",
   description: "Trade logger",
