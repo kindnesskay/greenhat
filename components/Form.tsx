@@ -71,33 +71,27 @@ export default function Form() {
     >
       <h1 className="text-2xl font-semibold">Record a new entry</h1>
       <div className="w-full">
-        <label
-          htmlFor="title-input"
-          className="block mb-2 pl-1 text-md  dark:text-white"
-        >
+        <label htmlFor="title-input" className="block mb-2 pl-1 text-md">
           Title
         </label>
         <input
           {...register("title")}
           type="text"
           id="title-input"
-          className="bg-gray-50 border  border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border  border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
         />
         {errors?.title && <p>{errors.title.message}</p>}
       </div>
       {/* note */}
       <div className="w-full mx-auto">
-        <label
-          htmlFor="note"
-          className="block mb-2 pl-1 text-md dark:text-white"
-        >
+        <label htmlFor="note" className="block mb-2 pl-1 text-md">
           Your message
         </label>
         <textarea
           {...register("note")}
           rows={5}
           id="note"
-          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Leave a note..."
         ></textarea>
         {errors?.note && <p>{errors.note.message}</p>}
@@ -105,33 +99,27 @@ export default function Form() {
       <div className="w-full flex gap-4">
         {/* profit input */}
         <div className="w-full">
-          <label
-            htmlFor="profit-input"
-            className="block mb-2 pl-1 text-md dark:text-white"
-          >
+          <label htmlFor="profit-input" className="block mb-2 pl-1 text-md ">
             Profit
           </label>
           <input
             {...register("profit")}
             type="text"
             id="profit-input"
-            className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
           />
           {errors?.profit && <p>{errors.profit.message}</p>}
         </div>
         {/* loss input */}
         <div className="w-full">
-          <label
-            htmlFor="loss-input"
-            className="block mb-2 pl-1 text-md dark:text-white"
-          >
+          <label htmlFor="loss-input" className="block mb-2 pl-1 text-md">
             Loss
           </label>
           <input
             {...register("loss")}
             type="text"
             id="loss-input"
-            className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
           />
         </div>
       </div>
