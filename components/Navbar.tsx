@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-
-function NavBar() {
+export default function NavBar() {
   const router = useRouter();
   const path = usePathname();
 
@@ -26,5 +25,3 @@ function NavBar() {
     </header>
   );
 }
-
-export default NavBar;
