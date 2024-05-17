@@ -1,6 +1,6 @@
 import "../globals.css";
 import BottomNav from "@/components/BottomNav";
-import NavBar from "@/components/NavBar";
+// import NavBar from "@/components/NavBar";
 import AppContextProvider from "@/context/AppContext";
 export const metadata = {
   title: "Greenhat",
@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <AppContextProvider>
         <body className="min-h-screen w-full relative bg-slate-100 flex flex-col items-center ">
-          <NavBar />
+          {/* <NavBar /> */}
           <main className="px-2 w-full max-w-lg">{children}</main>
           <BottomNav />
         </body>
