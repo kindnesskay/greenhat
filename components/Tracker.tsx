@@ -1,13 +1,15 @@
 "use client";
-import { SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Task, { initialTask, taskType } from "./Task";
 import TaskView from "./TaskView";
 import { UseApp } from "@/context/AppContext";
+
 export default function Tracker() {
   const { database } = UseApp();
   const [data, setData] = useState([]);
   const [view, setView] = useState(initialTask);
   const [viewID, setViewID] = useState(false);
+
   useEffect(() => {
     let stored_data = database.getAllData() as [];
     let total = database.totalItems;
@@ -27,19 +29,22 @@ export default function Tracker() {
   };
 
   return (
-    <div className="w-full max-w-md flex-1 rounded-md flex flex-col gap-4">
+    <div className="w-full flex-1 rounded-md flex flex-col gap-4">
       <h3 className="text-xl font-bold">Entries</h3>
       {!viewID
-        ? data &&
-          data.map((task_item: taskType) => {
-            return (
-              <Task
-                key={task_item.id}
-                task={task_item}
-                handleTaskClick={handleView}
-              />
-            );
-          })
+        ? data && (
+            <>
+              {data.map((task_item: taskType) => {
+                return (
+                  <Task
+                    key={task_item.id}
+                    task={task_item}
+                    handleTaskClick={handleView}
+                  />
+                );
+              })}
+            </>
+          )
         : data && (
             <div className="task-view-container">
               <TaskView

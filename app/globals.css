@@ -20,30 +20,13 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
+.task-bar {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
 @layer components {
   /* main */
-  .container {
-    @apply w-full flex justify-center;
-  }
-
-  .main-container {
-    @apply flex min-h-screen flex-1 flex-col items-center pb-10 pt-16 max-md:pb-32 sm:px-10;
-  }
-  .top-bar {
-    @apply fixed top-0 z-30 flex items-center w-full justify-between px-6 py-3;
-  }
-  .leftsidebar {
-    @apply sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto  pb-5 pt-28 max-md:hidden;
-  }
-  .rightsidebar {
-    @apply sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto pb-5 pt-28 max-xl:hidden;
-  }
-  .slider-button {
-    @apply rounded-full p-2 h-12 w-12 bg-slate-200;
-  }
-  .slider-button:active {
-    @apply bg-slate-400;
-  }
   .task-view-container {
     @apply flex flex-col w-full items-center h-full;
   }

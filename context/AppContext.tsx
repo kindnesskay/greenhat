@@ -1,21 +1,27 @@
 "use client";
 import DatabaseManager from "@/lib/tools/localStorage";
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 export type databaseType = DatabaseManager;
-const initial_state = {
-  database: new DatabaseManager(),
-};
-const AppContext = createContext(initial_state);
+
+interface AppContext {
+  database: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const AppContext = createContext({} as AppContext);
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const databaseName = "Trader_traker_v1";
   const database = new DatabaseManager(databaseName);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     database.update();
   }, []);
 
   return (
-    <AppContext.Provider value={{ database }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ database, isLoading, setIsLoading }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

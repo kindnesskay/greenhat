@@ -28,18 +28,20 @@ export default function Task({ task, handleTaskClick }: taskCompType) {
 
   return (
     <div
-      className={`h-16 w-full flex flex-row gap-2 justify-between rounded-lg`}
+      className={` task-bar h-20 flex flex-row gap-2 justify-between rounded-lg cursor-pointer hover:scale-105`}
       onClick={() => handleTaskClick(task)}
     >
       <div
-        className={`border-r-4 border-solid ${
-          profit > 0 ? "border-green-200" : "border-red-200"
+        className={`border-r-4 border-solid hover:cursor-pointer ${
+          profit > 0
+            ? "border-green-200 hover:border-green-400"
+            : "border-red-200 hover:border-red-400"
         }`}
       >
         <p className="w-16 font-semibold text-slate-400 text-md">{time}</p>
       </div>
       <div className="flex-1 flex flex-row gap-2 justify-between pl-4 border border-solid border-slate-300 rounded-lg ">
-        <div className="w-3/5 flex flex-col justify-center">
+        <div className="w-3/5 flex flex-col justify-center gap-2">
           <p className="text-lg  font-semibold ">{title}</p>
           <p className="text-xs text-slate-400 font-medium ">{date}</p>
         </div>
