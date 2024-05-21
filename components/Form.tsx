@@ -2,7 +2,7 @@
 import { useForm, Resolver } from "react-hook-form";
 import { uid } from "uid";
 import { UseApp } from "@/context/AppContext";
-import LoaidingComponent from "@/components/loading";
+import LoaidingComponent from "./loading";
 import { useEffect } from "react";
 type formValues = {
   title: string;
