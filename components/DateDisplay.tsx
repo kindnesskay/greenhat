@@ -30,9 +30,9 @@ export default function DateDisplay() {
   getDaysOfWeek();
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full">
       <div className="mb-4">
-        <h1 className="text-3xl font-bold pl-12">Today, {today}</h1>
+        <h1 className="text-3xl font-bold ">Today, {today}</h1>
       </div>
       <div className="grid grid-cols-7 gap-1 text-lg">
         {days_of_the_weerk.map((day) => (

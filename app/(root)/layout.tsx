@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AppContextProvider>
         <body className="min-h-screen w-full relative bg-slate-100 flex flex-col items-center ">
           {/* <NavBar /> */}
-          <main className="px-2 w-full max-w-lg">{children}</main>
+          <main className="px-2 w-full max-w-xl pt-8">{children}</main>
           <BottomNav />
         </body>
       </AppContextProvider>
