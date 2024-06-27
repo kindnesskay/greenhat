@@ -1,8 +1,8 @@
 "use client";
-import { useForm, Resolver, set } from "react-hook-form";
+import { useForm, Resolver } from "react-hook-form";
 import { uid } from "uid";
 import { UseApp } from "@/context/AppContext";
-import LoaidingComponent from "./loading";
+import LoaidingComponent from "@/components/Loading";
 import { useEffect, useState } from "react";
 type formValues = {
   title: string;
