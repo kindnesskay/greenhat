@@ -29,8 +29,8 @@ export default function Tracker() {
   };
 
   return (
-    <div className="w-full flex-1 rounded-md flex flex-col gap-4">
-      <h3 className="text-xl font-bold">Entries</h3>
+    <div className="w-full flex-1 rounded-md flex flex-col gap-4 ">
+      {!viewID && <h3 className="text-xl font-bold">Entries</h3>}
       {!viewID
         ? data && (
             <>

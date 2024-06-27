@@ -1,9 +1,9 @@
 "use client";
-import { useForm, Resolver } from "react-hook-form";
+import { useForm, Resolver, set } from "react-hook-form";
 import { uid } from "uid";
 import { UseApp } from "@/context/AppContext";
 import LoaidingComponent from "./loading";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 type formValues = {
   title: string;
   note: string;
@@ -23,6 +23,7 @@ const resolver: Resolver<formValues> = async (values) => {
               message: "Please add a title",
             },
           }),
+
       ...(values.note
         ? {}
         : {
@@ -31,32 +32,19 @@ const resolver: Resolver<formValues> = async (values) => {
               message: "Please add a note",
             },
           }),
-      ...(values.profit
-        ? {}
-        : {
-            profit: {
-              type: "required",
-              message: "Please add a profit",
-            },
-          }),
-      ...(values.loss
-        ? {}
-        : {
-            loss: {
-              type: "required",
-              message: "Please add a loss",
-            },
-          }),
     },
   };
 };
 export default function Form() {
   const { database, isLoading, setIsLoading } = UseApp();
+  const [profit, setProfit] = useState<string | number>("");
+  const [loss, setLoss] = useState<string | number>("");
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 100);
   }, [isLoading]);
+
   const {
     register,
     handleSubmit,
@@ -66,9 +54,12 @@ export default function Form() {
   const onSubmit = handleSubmit((data) => {
     const template = {
       id: uid().toString(),
-      date: new Date().toDateString(),
+      date: new Date().toString(),
       ...data,
+      loss,
+      profit,
     };
+
     setIsLoading(true);
     database.save(template);
     reset();
@@ -86,7 +77,7 @@ export default function Form() {
           <h1 className="text-2xl font-semibold">Record a new entry</h1>
           <div className="w-full">
             <label htmlFor="title-input" className="block mb-2 pl-1 text-md">
-              Title
+              Instrument
             </label>
             <input
               {...register("title")}
@@ -120,8 +111,20 @@ export default function Form() {
                 Profit
               </label>
               <input
-                {...register("profit")}
-                type="text"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (Number(value) >= 0) {
+                    setProfit(Number(value));
+                  }
+                  setLoss(0);
+
+                  if (value.length <= 0) {
+                    return setProfit("");
+                  }
+                }}
+                value={profit}
+                type="number"
+                pattern="[0-9]"
                 id="profit-input"
                 className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
               />
@@ -133,9 +136,23 @@ export default function Form() {
                 Loss
               </label>
               <input
-                {...register("loss")}
-                type="text"
+                onChange={(e) => {
+                  const value = e.target.value;
+
+                  if (Number(value) >= 0) {
+                    setLoss(Number(value));
+                  }
+
+                  setProfit(0);
+
+                  if (value.length <= 0) {
+                    return setLoss("");
+                  }
+                }}
+                value={loss}
+                type="number"
                 id="loss-input"
+                pattern="[0-9]"
                 className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
               />
             </div>

@@ -21,14 +21,17 @@ type taskCompType = {
 
 export default function Task({ task, handleTaskClick }: taskCompType) {
   let { title, id, profit, loss, date } = task;
+
   const time = new Date(date).toLocaleTimeString("en-US", {
     hour: "numeric",
     hour12: true,
+    minute: "2-digit",
   });
+  const parsed_date = new Date(date).toDateString();
 
   return (
     <div
-      className={` task-bar h-20 flex flex-row gap-2 justify-between rounded-lg cursor-pointer hover:scale-105`}
+      className={` task-bar h-20 flex flex-row gap-2 justify-between rounded-lg cursor-pointer hover:scale-105 `}
       onClick={() => handleTaskClick(task)}
     >
       <div
@@ -38,12 +41,12 @@ export default function Task({ task, handleTaskClick }: taskCompType) {
             : "border-red-200 hover:border-red-400"
         }`}
       >
-        <p className="w-16 font-semibold text-slate-400 text-md">{time}</p>
+        <p className="w-16 font-semibold text-slate-400 text-sm ">{time}</p>
       </div>
       <div className="flex-1 flex flex-row gap-2 justify-between pl-4 border border-solid border-slate-300 rounded-lg ">
         <div className="w-3/5 flex flex-col justify-center gap-2">
           <p className="text-lg  font-semibold ">{title}</p>
-          <p className="text-xs text-slate-400 font-medium ">{date}</p>
+          <p className="text-xs text-slate-400 font-medium ">{parsed_date}</p>
         </div>
         <div className="flex items-center font-semibold text-gray-700 pr-4">
           <p

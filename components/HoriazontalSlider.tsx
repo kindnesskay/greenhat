@@ -1,7 +1,36 @@
+"use client";
+import { UseApp } from "@/context/AppContext";
+import { Task } from "@/interfaces/task.interface";
+import { useEffect, useState } from "react";
 export default function HoriazontalSlider() {
+  const { database } = UseApp();
+  const [profit, setProfit] = useState(0);
+  const [loss, setLoss] = useState(0);
+  function GetTotal(total: number, number: number) {
+    return total + number;
+  }
+  useEffect(() => {
+    let stored_data = database.getAllData() as Task[];
+    const profitArray = stored_data.map((item) => {
+      return item.profit;
+    });
+    const lossArray = stored_data.map((item) => {
+      return item.loss;
+    });
+
+    setProfit(profitArray.reduce(GetTotal));
+    setLoss(lossArray.reduce(GetTotal));
+  });
   return (
-    <div className="w-full relative h-40  rounded-md ">
-      <h2 className="font-bold text-xl">Portfolio</h2>
+    <div className="w-full relative rounded-md py-2">
+      {/* <h2 className="font-bold text-xl">Portfolio</h2> */}
+      <p
+        className={`font-bold text-2xl text-center  ${
+          profit > loss ? "text-green-500" : "text-red-500"
+        }`}
+      >
+        ${profit - loss}
+      </p>
     </div>
   );
 }
