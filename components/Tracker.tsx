@@ -1,18 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import Task, { initialTask, taskType } from "./Task";
 import TaskView from "./TaskView";
 import { UseApp } from "@/context/AppContext";
+import { TaskInterface } from "@/interfaces/task.interface";
 
 export default function Tracker() {
   const { database } = UseApp();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<TaskInterface[] | null>(null);
   const [view, setView] = useState(initialTask);
   const [viewID, setViewID] = useState(false);
 
   useEffect(() => {
-    let stored_data = database.getAllData() as [];
-    let total = database.totalItems;
+    let stored_data = database.getAllData();
+    let total = database.getTotal();
     const last = total - 6;
     if (!stored_data) return;
     total > 6 ? setData(stored_data.slice(last, total)) : setData(stored_data);
