@@ -56,13 +56,15 @@ export default function Form() {
       id: uid().toString(),
       date: new Date().toString(),
       ...data,
-      loss,
-      profit,
+      loss: Number(loss),
+      profit: Number(profit),
     };
 
     setIsLoading(true);
     database.save(template);
     reset();
+    setProfit("");
+    setLoss("");
   });
 
   return (

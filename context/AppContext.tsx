@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 export type databaseType = DatabaseManager;
 
 interface AppContext {
-  database: any;
+  database: databaseType;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
