@@ -41,12 +41,21 @@ export default class DatabaseManager {
   getTotal(): number {
     return this.totalItems;
   }
-  remove(id: string): false | string {
+  remove(id: string) {
     this.update();
     if (!this.items) return false;
     this.items = this.items.filter((item) => item.id != id);
     this.totalItems--;
+    this.saveToDb();
     return `items with id '${id}' removed`;
+  }
+
+  private saveToDb() {
+    const data = {
+      data: this.items,
+      total: this.totalItems,
+    };
+    localStorage.setItem(this.databaseName, JSON.stringify(data));
   }
   save(data: TaskInterface): false | string {
     let saveObject: boolean = false;
@@ -69,13 +78,7 @@ export default class DatabaseManager {
       return error.code;
     } finally {
       if (saveObject) {
-        localStorage.setItem(
-          this.databaseName,
-          JSON.stringify({
-            total: this.totalItems,
-            data: this.items,
-          })
-        );
+        this.saveToDb();
       }
     }
   }
