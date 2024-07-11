@@ -18,7 +18,7 @@ export default function BottomNav() {
               alt={link.name + "-icon"}
               width={50}
               height={50}
-              className="h-auto w-full border-slate-400 hover:border-2 border-solid rounded-lg"
+              className="h-auto w-full hover:scale-105 rounded-lg"
             />
             <p>{link.name}</p>
           </div>

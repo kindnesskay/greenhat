@@ -78,27 +78,27 @@ export default function Form() {
         >
           <h1 className="text-2xl font-semibold">Record a new entry</h1>
           <div className="w-full">
-            <label htmlFor="title-input" className="block mb-2 pl-1 text-md">
+            <label htmlFor="title-input" className="block mb-2 pl-1 textlg">
               Instrument
             </label>
             <input
               {...register("title")}
               type="text"
               id="title-input"
-              className="bg-gray-50 border  border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
+              className="bg-gray-50 border  border-gray-500 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
             />
             {errors?.title && <p>{errors.title.message}</p>}
           </div>
           {/* note */}
           <div className="w-full mx-auto">
-            <label htmlFor="note" className="block mb-2 pl-1 text-md">
+            <label htmlFor="note" className="block mb-2 pl-1 text-lg">
               Your message
             </label>
             <textarea
               {...register("note")}
               rows={5}
               id="note"
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500"
+              className="block p-2.5 w-full text-2xl text-gray-900 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Leave a note..."
             ></textarea>
             {errors?.note && <p>{errors.note.message}</p>}
@@ -108,7 +108,7 @@ export default function Form() {
             <div className="w-full">
               <label
                 htmlFor="profit-input"
-                className="block mb-2 pl-1 text-md "
+                className="block mb-2 pl-1 text-lg "
               >
                 Profit
               </label>
@@ -126,15 +126,16 @@ export default function Form() {
                 }}
                 value={profit}
                 type="number"
-                pattern="[0-9]"
+                pattern="[0-9]*"
+                inputMode="numeric"
                 id="profit-input"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
               />
               {errors?.profit && <p>{errors.profit.message}</p>}
             </div>
             {/* loss input */}
             <div className="w-full">
-              <label htmlFor="loss-input" className="block mb-2 pl-1 text-md">
+              <label htmlFor="loss-input" className="block mb-2 pl-1 text-lg">
                 Loss
               </label>
               <input
@@ -154,8 +155,9 @@ export default function Form() {
                 value={loss}
                 type="number"
                 id="loss-input"
-                pattern="[0-9]"
-                className="bg-gray-50 border border-gray-500 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
+                pattern="[0-9]*"
+                inputMode="numeric"
+                className="bg-gray-50 border border-gray-500 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 "
               />
             </div>
           </div>
